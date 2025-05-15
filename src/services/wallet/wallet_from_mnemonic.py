@@ -4,9 +4,10 @@ from bip_utils import (
     Bip39MnemonicGenerator,
     Bip39SeedGenerator,
     Bip44,
-    Bip44Coins,
     Bip44Changes,
+    Bip44Coins,
 )
+from bip_utils.bip.bip44_base import Bip44Base
 
 from services.wallet.wallet_base import WalletBase
 
@@ -14,7 +15,7 @@ from services.wallet.wallet_base import WalletBase
 class WalletFromMnemonic(WalletBase):
     def __init__(
         self,
-        mnemonic: str = None,
+        mnemonic: str | None = None,
         account_index: int = 0,
         change: Bip44Changes = Bip44Changes.CHAIN_EXT,
         address_index: int = 0,
@@ -56,7 +57,7 @@ class WalletFromMnemonic(WalletBase):
         self.wallet = Bip44.FromSeed(self.seed_bytes, Bip44Coins.ETHEREUM)
         return self.wallet
 
-    def generate_account(self):
+    def generate_account(self) -> Bip44Base:
         if self.wallet is None:
             self.wallet = self.generate_eth_bip44_wallet()
         self.account = (
@@ -65,26 +66,32 @@ class WalletFromMnemonic(WalletBase):
             .Account(self.account_index)
             .Change(self.change)
             .AddressIndex(self.address_index)
+            if self.wallet
+            else None
         )
         return self.account
 
-    def get_address(self) -> str:
+    def get_address(self) -> str | None:
         if self.address is not None:
             return self.address
         if self.account is None:
             self.account = self.generate_account()
-        self.address = str(self.account.PublicKey().ToAddress())
+        self.address = (
+            str(self.account.PublicKey().ToAddress()) if self.account else None
+        )
         return self.address
 
-    def get_private_key(self) -> str:
+    def get_private_key(self) -> str | None:
         if self.private_key:
             return self.private_key
         if self.account is None:
             self.account = self.generate_account()
-        self.private_key = self.account.PrivateKey().Raw().ToHex()
+        self.private_key = (
+            self.account.PrivateKey().Raw().ToHex() if self.account else None
+        )
         return self.private_key
 
-    def get_mnemonic(self) -> str:
+    def get_mnemonic(self) -> str | None:
         if self.mnemonic is None:
             self.set_mnemonic()
         return self.mnemonic

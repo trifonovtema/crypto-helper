@@ -1,8 +1,9 @@
 import typer
-from .functions.wallet_generator import app as wallet_generator_app
+
 from .functions.send_from_wallet_to_wallets import (
     app as send_from_wallet_to_wallets_app,
 )
+from .functions.wallet_generator import app as wallet_generator_app
 
 app = typer.Typer(
     no_args_is_help=True,

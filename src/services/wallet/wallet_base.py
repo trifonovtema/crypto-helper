@@ -8,10 +8,13 @@ class WalletBase(ABC):
         self.private_key = None
 
     @abstractmethod
-    def get_address(self) -> str: ...
+    def get_address(self) -> str | None:
+        pass
 
     @abstractmethod
-    def get_private_key(self) -> str: ...
+    def get_private_key(self) -> str | None:
+        pass
 
     @abstractmethod
-    def get_mnemonic(self) -> str | None: ...
+    def get_mnemonic(self) -> str | None:
+        pass

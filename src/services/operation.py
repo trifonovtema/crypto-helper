@@ -1,16 +1,21 @@
-from services.chains.base.chain import Chain
-from .wallet.wallet import Wallet
+from typing import cast
+
 from rich import print
-from .abis.erc20_token import ABI as ERC20_ABI
+from web3.types import ChecksumAddress
+
+from services.chains.base.chain import Chain
+
 from .abis.bnb_greenfield_bridge import ABI as BNB_GREENFIELD_BRIDGE_ABI
+from .abis.erc20_token import ABI as ERC20_ABI
+from .wallet.wallet import Wallet
 
 
 class Operation:
     def __init__(
         self,
-        chain: Chain | None = None,
+        chain: Chain,
     ):
-        self.chain: Chain | None = chain
+        self.chain: Chain = chain
 
     def set_chain_by_rpc(self, rpc_url: str, chain_name: str):
         self.chain = Chain(
@@ -63,32 +68,36 @@ class Operation:
         self,
         wallet_address: str,
         token_address: str,
-    ) -> float:
-        token_address = self.chain.get_w3().to_checksum_address(token_address)
-        erc20_abi = ERC20_ABI
+    ) -> float | None:
+        w3 = self.chain.get_w3()
+        if w3:
+            token_address = w3.to_checksum_address(token_address)
 
-        token_contract = self.chain.w3.eth.contract(
-            address=token_address,
-            abi=erc20_abi,
-        )
-        raw_balance = token_contract.functions.balanceOf(wallet_address).call()
-        decimals = token_contract.functions.decimals().call()
-        formatted_balance = self.from_token_units(
-            raw_balance,
-            decimals,
-        )
-        self.print_balance(
-            wallet_address,
-            formatted_balance,
-            token_address,
-        )
-        return formatted_balance
+            erc20_abi = ERC20_ABI
+
+            token_contract = w3.eth.contract(
+                address=cast(ChecksumAddress, token_address),
+                abi=erc20_abi,
+            )
+            raw_balance = token_contract.functions.balanceOf(wallet_address).call()
+            decimals = token_contract.functions.decimals().call()
+            formatted_balance = self.from_token_units(
+                raw_balance,
+                decimals,
+            )
+            self.print_balance(
+                wallet_address,
+                formatted_balance,
+                token_address,
+            )
+            return formatted_balance
+        return None
 
     def get_balance(
         self,
         address: str | None = None,
         token_address: str | None = None,
-    ) -> float:
+    ) -> float | None:
 
         wallet_address = self.chain.get_w3().to_checksum_address(address)
 
@@ -137,8 +146,10 @@ class Operation:
         return int(amount * (10**decimals))
 
     @staticmethod
-    def from_token_units(amount: int, decimals: int) -> float:
+    def from_token_units(amount: int, decimals: int | None) -> float:
         """Переводит минимальные единицы токена в читаемый формат"""
+        if decimals is None:
+            raise ValueError("Decimals must be specified")
         return amount / (10**decimals)
 
     def send_token(

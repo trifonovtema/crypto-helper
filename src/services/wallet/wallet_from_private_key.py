@@ -14,11 +14,13 @@ class WalletFromPrivateKey(WalletBase):
     def set_account(self):
         self.account = Account.from_key(self.private_key)
 
-    def get_address(self) -> str:
+    def get_address(self) -> str | None:
         if self.address is not None:
             return self.address
-        self.address = self.account.address
-        return self.address
+        if self.account:
+            self.address = self.account.address
+            return self.address
+        raise ValueError("Account is not set")
 
     def get_private_key(self) -> str:
         return self.private_key

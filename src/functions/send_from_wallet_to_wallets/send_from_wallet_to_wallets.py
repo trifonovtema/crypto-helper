@@ -1,12 +1,15 @@
-from services.chains.base.chain import Chain
-from services.operation import Operation
-from services.wallet.wallet import Wallet
-from .config import config
-import yaml
 import os
-from services.chains.chains import ChainRegistry
+
+import yaml
 from rich import print
 from rich.markdown import Markdown
+
+from services.chains.base.chain import Chain
+from services.chains.chains import ChainRegistry
+from services.operation import Operation
+from services.wallet.wallet import Wallet
+
+from .config import config
 
 
 def get_file_path(file_name):
@@ -46,7 +49,7 @@ def send_token():
                             mnemonic=value["mnemonic"]
                         ).get_address()
                     elif "private_key" in value:
-                        target_wallet = Wallet(
+                        target_address = Wallet(
                             private_key=value["private_key"]
                         ).get_address()
                     else:
@@ -57,3 +60,5 @@ def send_token():
                         amount=config.amount,
                         to_address=target_address,
                     )
+
+                    print(f"Transaction hash: {tx}")

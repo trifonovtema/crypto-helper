@@ -1,12 +1,12 @@
-import json
 import os
 
 import yaml
-from .config import config
-from services.wallet.wallet import Wallet
 from rich import print
 from rich.markdown import Markdown
 
+from services.wallet.wallet import Wallet
+
+from .config import config
 
 
 def generate_wallets():
@@ -29,7 +29,8 @@ def generate_wallets():
         data.append(wallet_data)
     with open(f"{config.output_file_name}.yaml", "w") as file:
         print(f"Number of generated wallets: {config.wallets_number}")
-        print(f"Filename with generated wallets: {os.path.abspath(f'{config.output_file_name}.yaml')}")
+        print(
+            f"Filename with generated wallets: {os.path.abspath(f'{config.output_file_name}.yaml')}"
+        )
         print(f"Wallets prefix: {config.wallet_prefix!r}")
         yaml.dump(data, file, default_flow_style=False, allow_unicode=True)
-

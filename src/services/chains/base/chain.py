@@ -37,8 +37,10 @@ class Chain:
             raise ValueError("RPC URL is not set")
         self.w3 = Web3(Web3.HTTPProvider(self.rpc_url))
 
-    def get_contract_address(self, name: str) -> str:
-        return self.contract_address[name]
+    def get_contract_address(self, name: str) -> str | None:
+        if self.contract_address:
+            return self.contract_address[name]
+        return None
 
-    def get_native_token_decimals(self) -> int:
+    def get_native_token_decimals(self) -> int | None:
         return self.native_token_decimals
