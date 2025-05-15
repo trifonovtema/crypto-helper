@@ -51,7 +51,6 @@ crypto-helper/
 │   │   ├── wallet_generator.py
 │   │   └── __init__.py
 │   ├── functions/                  # Business logic grouped by domain
-│   │   ├── config.py               # Shared configuration handling
 │   │   ├── send_from_wallet_to_wallets/
 │   │   │   ├── send_from_wallet_to_wallets.py
 │   │   │   ├── config.py
