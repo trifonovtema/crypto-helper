@@ -13,7 +13,7 @@ def get_wallet_config_info() -> str:
     config_path = os.path.abspath(config.__file__)
 
     lines = [
-        f"Generate Wallet\nYou need to fill config file:\n  {config_path}\nCurrent config values:"
+        f"Send Token from wallet to specified wallets\nYou need to fill config file:\n  {config_path}\nCurrent config values:"
     ]
 
     for name, value in config.config.model_dump().items():
