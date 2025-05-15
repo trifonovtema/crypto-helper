@@ -34,7 +34,7 @@ class Chain:
 
     def set_w3(self) -> None:
         if self.rpc_url is None:
-            print("RPC URL is not set")
+            raise ValueError("RPC URL is not set")
         self.w3 = Web3(Web3.HTTPProvider(self.rpc_url))
 
     def get_contract_address(self, name: str) -> str:
