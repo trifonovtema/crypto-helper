@@ -16,7 +16,7 @@ class Wallet(WalletBase):
     ):
         super().__init__()
         if mnemonic and private_key:
-            raise ValueError("Укажи только mnemonic или private_key, не оба")
+            raise ValueError("Specify only mnemonic or privet_key. Not both of them")
 
         if mnemonic:
             self.impl = WalletFromMnemonic(
