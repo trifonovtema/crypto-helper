@@ -28,7 +28,6 @@ run:
 lint:
 	$(UV) run ruff check src
 	$(UV) run black src
-	$(UV) run isort src
 	$(UV) run mypy src
 	$(UV) run flake8 src
 
