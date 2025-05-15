@@ -7,8 +7,27 @@ requires-python = ">=3.11"
 dependencies = [
     "bip-utils>=2.9.3",
     "eth-account>=0.13.7",
+    "pip>=25.1.1",
     "pydantic>=2.11.4",
     "pyyaml>=6.0.2",
     "typer>=0.15.4",
     "web3>=7.11.1",
 ]
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "flake8>=7.2.0",
+    "isort>=6.0.1",
+    "mypy>=1.15.0",
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.10",
+    "types-pyyaml>=6.0.12.20250402",
+]
+
+[tool.mypy]
+python_version = "3.11"
+explicit_package_bases = true
+install_types=true
+mypy_path=["src"]
+ignore_missing_imports = true
