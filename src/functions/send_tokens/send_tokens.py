@@ -25,7 +25,7 @@ def get_chain() -> Chain:
     return chain
 
 
-def send_token_from_many_wallets_to_one_address():
+def send_token():
 
     operation = Operation(get_chain())
 
@@ -45,14 +45,19 @@ def send_token_from_many_wallets_to_one_address():
                         "There should be specified mnemonik or private key for wallet"
                     )
 
-                with open(get_file_path(config.target_address_filename)) as f_target:
+                with open(get_file_path(config.target_addresses_filename)) as f_target:
                     target_addresses = [
                         line.strip() for line in f_target if line.strip()
                     ]
                     for target_address in target_addresses:
-                        print(f"Sending to address {target_address!r}")
+                        print(
+                            f"[bold]Working with target address [green]{target_address!r}[/green][/bold]"
+                        )
                         operation.send(
                             wallet=source_wallet,
                             amount=config.amount,
                             to_address=target_address,
+                        )
+                        print(
+                            "-----------------------------------------------------------------"
                         )

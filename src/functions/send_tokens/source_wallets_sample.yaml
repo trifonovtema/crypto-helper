@@ -1,6 +1,10 @@
-- Wallet 1:
-    mnemonic: <mnemonic>
-    private_key: <private key>
-- Wallet 2:
-    mnemonic: <mnemonic>
-    private_key: <private key>
+- dedic 1:
+    address: '0x7698BBe12B78831fc104A02Fb33b288387Ee5fED'
+    mnemonic: swallow flash visa marine organ bracket reveal diesel renew iron grocery
+      muffin
+    private_key: 13d59842b9d2f22906964a9f4f0a6b5cf96c14fc1dfb54e28ce850ea63743c04
+- dedic 2:
+    address: '0x21895afA2E8F079633FC8F44d04443d6B7465863'
+    mnemonic: naive crucial stereo round brush bundle dress fork obtain dynamic tomato
+      abstract
+    private_key: a148629bcf413e6f74ce93ef1fff2a0f63c7f964fb8414720f272241d7d85f61
