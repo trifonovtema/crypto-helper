@@ -51,7 +51,7 @@ def send_token_from_many_wallets_to_one_address():
                     ]
                     for target_address in target_addresses:
                         print(f"Sending to address {target_address!r}")
-                        tx = operation.send(
+                        operation.send(
                             wallet=source_wallet,
                             amount=config.amount,
                             to_address=target_address,

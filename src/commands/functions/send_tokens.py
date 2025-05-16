@@ -1,5 +1,3 @@
-import os
-
 from typer import Typer
 
 from .send_token.send_from_one_wallet_to_many_wallets import (
