@@ -18,11 +18,7 @@
    uv sync
    ```
 
-   > 💡 If `uv` is not installed, run:
-   >
-   > ```bash
-   > curl -Ls https://astral.sh/uv/install.sh | bash
-   > ```
+   > 💡 If `uv` is not installed, follow to [UV installation guide](https://docs.astral.sh/uv/getting-started/installation/)
 
 ## 🚀 Usage
 
