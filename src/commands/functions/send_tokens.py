@@ -1,18 +1,32 @@
+import os
+
 from typer import Typer
 
-from .send_token.send_from_one_wallet_to_many_wallets import (
-    app as send_from_wallet_to_wallets_app,
-)
-from .send_token.send_from_many_wallets_to_one_address import (
-    app as send_from_many_wallets_to_one_address_app,
+from functions.send_tokens.send_tokens import (
+    send_token,
 )
 
-app = Typer(
+app = Typer()
+
+
+def get_wallet_config_info() -> str:
+    from functions.send_tokens import config
+
+    config_path = os.path.abspath(config.__file__)
+
+    lines = [
+        f"Send Token\nYou need to fill config file:\n  {config_path}\nCurrent config values:"
+    ]
+
+    for name, value in config.config.model_dump().items():
+        lines.append(f"  {name} = {repr(value)}")
+
+    return "\n".join(lines)
+
+
+@app.command(
     name="st",
-    help="Send Token",
-    no_args_is_help=True,
+    help=get_wallet_config_info(),
 )
-
-
-app.add_typer(send_from_wallet_to_wallets_app)
-app.add_typer(send_from_many_wallets_to_one_address_app)
+def st():
+    send_token()
