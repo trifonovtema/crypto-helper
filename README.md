@@ -31,56 +31,6 @@ source .venv/bin/activate  # Unix/Linux
 python src/main.py
 ```
 
-## 🗂️ Project Structure
-
-```
-crypto-helper/
-├── pyproject.toml                  # Project metadata and dependencies
-├── uv.lock                         # Dependency lock file
-├── .python-version                 # Python version used by pyenv
-├── .gitignore                      # Git ignore file
-├── src/
-│   ├── main.py                     # Entrypoint script
-│   ├── commands/                   # CLI command definitions
-│   │   ├── cli.py                  # Argument parser and dispatcher
-│   │   ├── send_from_wallet_to_wallets.py
-│   │   ├── wallet_generator.py
-│   │   └── __init__.py
-│   ├── functions/                  # Business logic grouped by domain
-│   │   ├── send_from_wallet_to_wallets/
-│   │   │   ├── send_from_wallet_to_wallets.py
-│   │   │   ├── config.py
-│   │   │   ├── source_wallet_sample.yaml
-│   │   │   ├── target_wallets_sample.yaml
-│   │   │   └── __init__.py
-│   │   ├── wallet_generator/
-│   │   │   ├── wallet_generator.py
-│   │   │   ├── config.py
-│   │   │   └── __init__.py
-│   │   └── __init__.py
-│   ├── services/                   # Blockchain logic and low-level integrations
-│   │   ├── operation.py            # Execution of higher-level flows
-│   │   ├── abis/                   # Contract ABI interfaces
-│   │   │   ├── bnb_greenfield_bridge.py
-│   │   │   ├── erc20_token.py
-│   │   │   └── __init__.py
-│   │   ├── chains/                 # Blockchain chain definitions
-│   │   │   ├── chains.py
-│   │   │   ├── base/
-│   │   │   │   ├── chain.py
-│   │   │   │   ├── chain_registry.py
-│   │   │   │   └── __init__.py
-│   │   │   └── __init__.py
-│   │   ├── wallet/                 # Wallet creation and abstraction logic
-│   │   │   ├── wallet.py
-│   │   │   ├── wallet_base.py
-│   │   │   ├── wallet_from_mnemonic.py
-│   │   │   ├── wallet_from_private_key.py
-│   │   │   └── __init__.py
-│   │   └── __init__.py
-│   └── __init__.py
-```
-
 ## ✨ Key Features
 
 * **Check balance** — for specified addresses for native tokens and erc20 tokens.
