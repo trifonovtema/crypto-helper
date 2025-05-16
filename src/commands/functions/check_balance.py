@@ -2,18 +2,18 @@ import os
 
 from typer import Typer
 
-from functions.send_from_wallet_to_wallets.send_from_wallet_to_wallets import send_token
+from functions.check_balance.check_balance import check_balance
 
 app = Typer()
 
 
 def get_wallet_config_info() -> str:
-    from functions.send_from_wallet_to_wallets import config
+    from functions.check_balance import config
 
     config_path = os.path.abspath(config.__file__)
 
     lines = [
-        f"Send Token from wallet to specified wallets\nYou need to fill config file:\n  {config_path}\nCurrent config values:"
+        f"Check balance\nYou need to fill config file:\n  {config_path}\nCurrent config values:"
     ]
 
     for name, value in config.config.model_dump().items():
@@ -23,8 +23,8 @@ def get_wallet_config_info() -> str:
 
 
 @app.command(
-    name="send_token",
+    name="cb",
     help=get_wallet_config_info(),
 )
-def s_t():
-    send_token()
+def cb():
+    check_balance()
