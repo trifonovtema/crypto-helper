@@ -83,10 +83,10 @@ crypto-helper/
 
 ## ✨ Key Features
 
+* **Check balance** — for specified addresses for native tokens and erc20 tokens.
 * **Wallet Generator** — generate multiple wallets with mnemonic or private key.
-* **Token Transfers** — send tokens from a single wallet to multiple targets.
+* **Token Transfers** — send tokens from a single or multiple wallets to single or multiple targets.
 * **Greenfield Bridge Support** — interact with BNB Greenfield Bridge contracts.
-* **ERC20 Utilities** — send and manage ERC20 tokens via contract interaction.
 * **Modular CLI** — easily extend with new commands.
 
 ## 📄 License
