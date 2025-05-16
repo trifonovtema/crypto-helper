@@ -28,7 +28,7 @@ After activating the virtual environment, run the CLI:
 source .venv/bin/activate  # Unix/Linux
 .venv\Scripts\activate.bat  # Windows
 
-python src/main.py
+uv run src/main.py
 ```
 
 ## ✨ Key Features
