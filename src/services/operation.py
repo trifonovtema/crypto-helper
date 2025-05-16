@@ -203,6 +203,7 @@ class Operation:
         amount: float,
         token_address: str | None = None,
     ) -> str | None:
+        print(f"Transaction for {self.chain.name} chain:")
         print(f"Send From: {wallet.get_address()!r}")
         print(f"Send To: {to_address!r}")
         print(f"Amount: {amount!r}")
