@@ -10,7 +10,6 @@ ACTIVATE = source $(VENV_DIR)/bin/activate
 help:
 	@echo "Available commands:"
 	@echo "  make install     - Create virtualenv and install dependencies using uv"
-	@echo "  make run         - Run the main script"
 	@echo "  make lint        - Run linters"
 	@echo "  make pre-commit  - Run pre-commit checks"
 	@echo "  make format      - Format code with ruff"
@@ -20,10 +19,6 @@ install:
 	$(UV) venv
 	$(UV) sync
 	$(ACTIVATE)
-
-run:
-	$(UV) run src/main.py
-
 
 lint:
 	$(UV) run ruff check src
